@@ -11,15 +11,12 @@ export default function HomePage() {
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Alle");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getEvents() {
-      console.log("Loading:", loading);
       const response = await fetch(`${SUPABASE_URL}/events?order=date.asc`, { headers });
       const data = await response.json();
       setEvents(data);
-      setLoading(false);
     }
 
     getEvents();
@@ -99,7 +96,6 @@ export default function HomePage() {
             );
           })}
         </section>
-
       </main>
       <footer className="site-footer">
         <div className="footer-top">
