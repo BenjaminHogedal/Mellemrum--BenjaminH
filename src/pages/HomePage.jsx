@@ -32,6 +32,17 @@ export default function HomePage() {
     return matchesSearch && matchesCategory;
   });
 
+  function formatEventDate(eventDate) {
+    const date = new Date(eventDate);
+    const formattedDate = date.toLocaleDateString("da-DK", {
+      weekday: "long",
+      day: "numeric",
+      month: "long"
+    });
+
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  }
+
   return (
     <>
       <header className="hero">
@@ -74,30 +85,24 @@ export default function HomePage() {
           </label>
         </section>
 
-        {filteredEvents.length === 0 && (
-          <p className="no-results">Ingen events fundet. Prøv at ændre søgningen eller kategorien.</p>
-        )}
         <section className="event-grid">
-          {filteredEvents.map((event) => {
-            const date = new Date(event.date);
-            return (
-              <article className="event-card" key={event.id}>
-                <img src={event.image} alt="" />
-                <div className="event-card-content">
-                  <p className="event-category">{event.category}</p>
-                  <h3>{event.title}</h3>
-                  <p>{event.summary}</p>
-                  <div className="event-meta">
-                    <span>{date.toLocaleDateString("da-DK", { day: "numeric", month: "short" })}</span>
-                    <span>{event.venueName}</span>
-                  </div>
-                  <Link className="card-link" to={`/events/${event.id}`}>
-                    Læs mere
-                  </Link>
+          {filteredEvents.map((event) => (
+            <article className="event-card" key={event.id}>
+              <img src={event.image} alt="" />
+              <div className="event-card-content">
+                <p className="event-category">{event.category}</p>
+                <h3>{event.title}</h3>
+                <p>{event.summary}</p>
+                <div className="event-meta">
+                  <span>{formatEventDate(event.date)}</span>
+                  <span>{event.venueName}</span>
                 </div>
-              </article>
-            );
-          })}
+                <Link className="card-link" to={`/events/${event.id}`}>
+                  Læs mere
+                </Link>
+              </div>
+            </article>
+          ))}
         </section>
       </main>
       <footer className="site-footer">
