@@ -48,6 +48,10 @@ SQL-filen opretter tabellerne `events` og `registrations` og indsætter de start
 
 ![Events i Supabase Table Editor](docs/images/setup/table-events.webp)
 
+Vælg derefter tabellen `registrations`. Her bør du kunne se de to starttilmeldinger.
+
+![Tilmeldinger i Supabase Table Editor](docs/images/setup/table-registrations.webp)
+
 Du kan også åbne **Database → Schema Visualizer**. Her skal du kunne se tabellerne `events` og `registrations`. De har endnu ingen relation til hinanden; det er en del af udgangspunktet for casen. Bemærk også, at flere events bruger samme venue, men gentager `venueName`, `venueAddress`, `venuePostalCode`, `venueCity` og `venueWebsite` direkte på hvert event.
 
 ![Events og registrations i Supabase Schema Visualizer](docs/images/setup/schema-visualiser.webp)
@@ -105,6 +109,22 @@ Kontrollér, at:
 
 Tilmeldingsformularen logger foreløbig de indtastede værdier i konsollen. Den gemmer endnu ikke tilmeldingen i Supabase.
 
+## 5. Deploy appen
+
+Når løsningen virker lokalt, skal du deploye den til GitHub Pages. Projektet indeholder allerede et GitHub Actions-workflow, som bygger og deployer ved push til `main`.
+
+Før du pusher:
+
+1. Kontrollér, at `base` i `package.json` svarer til navnet på dit GitHub-repository.
+2. Opret GitHub Environment `github-pages-deployment`.
+3. Tilføj `VITE_SUPABASE_URL` og `VITE_SUPABASE_APIKEY` som **Environment variables** i dette environment.
+4. Kør `npm run lint` og `npm run build` lokalt.
+5. Push til `main`, og følg deploymenten under **Actions** på GitHub.
+
+Når workflowet er gennemført, skal du åbne den deployede løsning og kontrollere de samme brugerflows som lokalt. Afprøv også direkte links og genindlæsning af undersider.
+
+Se den gennemgåede proces på Canvas: [Web App-forbedringer og teknisk fundament – 19/08/2026](https://eaaa.instructure.com/courses/30922/pages/race-product-optimization-web-app-forbedringer-og-teknisk-fundament-19-08-2026).
+
 ## Hvis appen ikke viser data
 
 - Kontrollér, at både `events` og `registrations` findes i Supabase.
@@ -134,7 +154,3 @@ npm run lint
 npm run build
 npm run preview
 ```
-
-## Deployment
-
-Projektet deployes til GitHub Pages ved push til `main`. Tilføj `VITE_SUPABASE_URL` og `VITE_SUPABASE_APIKEY` som variables i GitHub Environment `github-pages-deployment`, før den deployede app skal hente data fra Supabase.
