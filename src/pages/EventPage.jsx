@@ -55,7 +55,17 @@ export default function EventPage() {
               </p>
               <p>
                 <strong>Sted</strong>
-                {event.venueName}, {event.venueAddress}
+                <span>
+                  {event.venueName}
+                  <br />
+                  {event.venueAddress}, {event.venuePostalCode} {event.venueCity}
+                  {event.venueWebsite && (
+                    <>
+                      <br />
+                      <a href={event.venueWebsite}>Besøg venue</a>
+                    </>
+                  )}
+                </span>
               </p>
               <p>
                 <strong>Pris</strong>
