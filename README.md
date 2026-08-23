@@ -2,38 +2,114 @@
 
 Mellemrum er en React-prototype for en lokal kultur- og eventplatform. Projektet er startpunktet for Case 1 i Product Optimization.
 
-## Funktioner
+Guiden hjælper dig med at få React-projektet til at køre lokalt og forbinde det til dit eget Supabase-projekt. Du behøver ikke kunne skrive SQL for at følge opsætningen.
 
-- Eventoversigt med søgning og kategorier
-- Detaljeside for det enkelte event
-- Tilmeldingsformular med foreløbig håndtering i konsollen
-- Intern oversigt over registrerede tilmeldinger
-- React Router og deployment til GitHub Pages
+## Det skal du bruge
 
-## Kom i gang
+- Node.js installeret på din computer
+- en Supabase-konto
+- projektet åbnet i VS Code
+
+## 1. Installér projektet
+
+Åbn terminalen i projektets mappe, og installér dependencies:
 
 ```bash
 npm install
+```
+
+Vent med at starte appen, til Supabase og `.env` er sat op i de næste trin.
+
+## 2. Opret tabeller og startdata i Supabase
+
+Opret et nyt Supabase-projekt, eller åbn det projekt, du skal bruge til casen.
+
+Åbn filen [supabase/starter.sql](supabase/starter.sql) i VS Code. Du skal ikke skrive eller ændre SQL-koden nu. Markér hele filens indhold, og kopiér det.
+
+Gå derefter til **SQL Editor** i Supabase:
+
+1. Opret en ny query.
+2. Indsæt hele indholdet fra `starter.sql`.
+3. Klik på **Run**.
+
+![SQL-koden indsat i Supabase SQL Editor](docs/images/setup/paste-sql-in-editor.webp)
+
+Hvis Supabase viser advarslen på billedet nedenfor, skal du vælge **Run without RLS** for denne starter.
+
+![Supabase-advarsel med knappen Run without RLS](docs/images/setup/run-without-rls.webp)
+
+SQL-filen opretter tabellerne `events` og `registrations` og indsætter de startdata, som appen forventer. Vent, til Supabase viser, at din query er gennemført.
+
+### Kontrollér resultatet
+
+Åbn **Table Editor**, og vælg tabellen `events`. Du bør kunne se ni events.
+
+![Events i Supabase Table Editor](docs/images/setup/table-events.webp)
+
+Du kan også åbne **Database → Schema Visualizer**. Her skal du kunne se tabellerne `events` og `registrations`. De har endnu ingen relation til hinanden; det er en del af udgangspunktet for casen.
+
+![Events og registrations i Supabase Schema Visualizer](docs/images/setup/schema-visualiser.webp)
+
+## 3. Forbind React-projektet til Supabase
+
+Kopiér først projektets eksempel på en miljøfil:
+
+```bash
+cp .env.example .env
+```
+
+Du kan også duplikere `.env.example` i VS Code og omdøbe kopien til `.env`.
+
+Åbn derefter `.env` i VS Code. Du skal indsætte din Supabase API URL og din publishable key.
+
+### Find API URL
+
+Gå til **Integrations → Data API** i Supabase, og kopiér værdien under **API URL**.
+
+![API URL i Supabase Data API](docs/images/setup/copy-api-url.webp)
+
+Fjern den afsluttende `/`, hvis den følger med. Værdien skal ende på `/rest/v1`.
+
+### Find din publishable key
+
+Gå til **Project Settings → API Keys**, og kopiér projektets **Publishable key**. Brug ikke en key fra området **Secret keys**.
+
+![Publishable key i Supabase](docs/images/setup/copy-api-key.webp)
+
+Din `.env` skal nu have denne form:
+
+```bash
+VITE_SUPABASE_URL=https://dit-projekt.supabase.co/rest/v1
+VITE_SUPABASE_APIKEY=din-publishable-key
+```
+
+Gem filen. `.env` er allerede tilføjet til `.gitignore` og skal ikke pushes til GitHub.
+
+## 4. Start appen
+
+Kør udviklingsserveren:
+
+```bash
 npm run dev
 ```
 
-Appen starter normalt på `http://localhost:5173`.
+Åbn den adresse, terminalen viser. Det er normalt [http://localhost:5173](http://localhost:5173).
 
-## Supabase
+Kontrollér, at:
 
-1. Opret eller åbn det udleverede Supabase-projekt.
-2. Kør [supabase/starter.sql](supabase/starter.sql) i Supabase SQL Editor, hvis tabeller og data ikke allerede er oprettet.
-3. Kopiér `.env.example` til `.env`.
-4. Tilføj projektets URL og publishable key:
+- forsiden viser events fra Supabase
+- du kan åbne en eventside
+- siden `/tilmeldinger` viser de eksisterende tilmeldinger
 
-```bash
-VITE_SUPABASE_URL=https://your-project.supabase.co/rest/v1
-VITE_SUPABASE_APIKEY=your-supabase-publishable-api-key
-```
+Tilmeldingsformularen logger foreløbig de indtastede værdier i konsollen. Den gemmer endnu ikke tilmeldingen i Supabase.
 
-5. Genstart udviklingsserveren.
+## Hvis appen ikke viser data
 
-Appen forventer, at events og eksisterende tilmeldinger findes i Supabase. Tilmeldingsformularen logger foreløbig de indtastede værdier i konsollen og gemmer ikke en tilmelding.
+- Kontrollér, at både `events` og `registrations` findes i Supabase.
+- Kontrollér, at API URL ender på `/rest/v1` uden en ekstra `/`.
+- Kontrollér, at du har kopieret din publishable key og ikke en secret key.
+- Genstart `npm run dev`, hvis du har ændret `.env`, mens serveren kørte.
+- Se efter fejl i browserens Console og Network-panel.
 
 ## Ruter
 
