@@ -11,6 +11,7 @@
   --lime: #d8ff62;
   --orange: #ff785a;
   --line: rgba(23, 32, 29, 0.18);
+  --shadow: 0 18px 50px rgba(23, 32, 29, 0.09);
   --page-gutter: clamp(1.25rem, 4vw, 4rem);
   --content-width: 1280px;
   --content-edge: max(var(--page-gutter), calc((100vw - var(--content-width)) / 2));
@@ -25,6 +26,7 @@ html {
 }
 
 body {
+  line-height: 1.5;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -43,10 +45,12 @@ select {
 .site-nav {
   align-items: center;
   background: var(--green);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 28px rgba(12, 42, 34, 0.12);
   color: white;
   display: flex;
   justify-content: space-between;
-  min-height: 76px;
+  min-height: 80px;
   padding: 0 var(--content-edge);
   position: sticky;
   top: 0;
@@ -54,7 +58,7 @@ select {
 }
 
 .brand {
-  font-size: 1.45rem;
+  font-size: 1.6rem;
   font-weight: 800;
   letter-spacing: -0.04em;
   text-decoration: none;
@@ -75,6 +79,7 @@ select {
   font-size: 0.92rem;
   padding: 0.55rem 0.85rem;
   text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
 }
 
 .nav-links a:hover,
@@ -123,12 +128,18 @@ select {
 }
 
 .hero-link {
-  border-bottom: 1px solid var(--lime);
-  color: var(--lime);
+  background: var(--lime);
+  border-radius: 999px;
+  color: var(--green);
   display: inline-block;
   font-weight: 700;
-  padding-bottom: 0.25rem;
+  padding: 0.75rem 1.1rem;
   text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.hero-link:hover {
+  transform: translateY(-2px);
 }
 
 main {
@@ -140,6 +151,7 @@ main {
 .section-heading {
   align-items: end;
   display: flex;
+  gap: 3rem;
   justify-content: space-between;
   margin-bottom: 2.5rem;
 }
@@ -160,13 +172,14 @@ main {
 }
 
 .filters {
-  border-bottom: 1px solid var(--line);
-  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   display: grid;
   gap: 1rem;
   grid-template-columns: 2fr 1fr;
   margin-bottom: 2.5rem;
-  padding: 1rem 0;
+  padding: 1rem;
 }
 
 .filters label,
@@ -183,29 +196,41 @@ input,
 select {
   background: white;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 8px;
   color: var(--ink);
   min-height: 48px;
   padding: 0.75rem 0.9rem;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(23, 63, 53, 0.12);
+  outline: none;
 }
 
 .event-grid {
   display: grid;
-  gap: 1.3rem;
+  gap: 1.5rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .event-card {
   background: white;
   border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 26px rgba(23, 32, 29, 0.05);
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  overflow: hidden;
+  transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
-.event-card:nth-child(2n) {
-  border-radius: 20px 0 20px 0;
-  overflow: hidden;
+.event-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
 }
 
 .event-card img {
@@ -255,37 +280,24 @@ select {
 .card-link {
   align-self: flex-start;
   background: var(--green);
-  border-radius: 2px;
+  border-radius: 999px;
   color: white;
   font-size: 0.88rem;
   font-weight: 750;
   margin-top: 1rem;
   padding: 0.7rem 1rem;
   text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
 }
 
-.event-card:nth-child(3n) .card-link {
-  background: var(--orange);
-  color: var(--ink);
+.card-link:hover {
+  background: var(--lime);
+  color: var(--green);
 }
 
 .message {
   background: var(--cream);
   padding: 1rem;
-}
-
-.internal-link {
-  align-items: center;
-  border-top: 1px solid var(--line);
-  display: flex;
-  font-size: 0.85rem;
-  justify-content: space-between;
-  margin-top: 4rem;
-  padding-top: 1rem;
-}
-
-.internal-link a {
-  font-weight: 750;
 }
 
 .page-header,
@@ -332,8 +344,11 @@ select {
 
 .event-detail {
   background: white;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
+  overflow: hidden;
 }
 
 .event-detail > img {
@@ -368,6 +383,7 @@ select {
 
 .signup-panel {
   background: var(--lime);
+  border-radius: 18px;
   display: grid;
   gap: 4rem;
   grid-template-columns: 1fr 1fr;
@@ -420,6 +436,9 @@ select {
 .registration-list {
   background: white;
   border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 26px rgba(23, 32, 29, 0.05);
+  overflow: hidden;
 }
 
 .registration-row {
@@ -481,17 +500,25 @@ select {
 }
 
 .site-footer {
-  align-items: end;
   background: #102f28;
   color: rgba(255, 255, 255, 0.72);
-  display: grid;
-  gap: 3rem;
-  grid-template-columns: 2fr 1fr auto;
   padding: clamp(3rem, 6vw, 5rem) var(--content-edge);
 }
 
 .site-footer p {
   margin: 0.35rem 0;
+}
+
+.footer-top {
+  align-items: start;
+  display: grid;
+  gap: clamp(3rem, 8vw, 8rem);
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+}
+
+.footer-intro > p:last-child {
+  line-height: 1.6;
+  max-width: 30rem;
 }
 
 .footer-brand {
@@ -511,17 +538,43 @@ select {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.14em;
+  margin-bottom: 0.75rem !important;
   text-transform: uppercase;
 }
 
-.site-footer a {
-  color: white;
-  display: inline-block;
-  margin: 0.45rem 0;
+.footer-links {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.footer-meta {
+.footer-link-group {
+  align-content: start;
+  display: grid;
+}
+
+.footer-link-group a {
+  color: white;
+  padding: 0.28rem 0;
+  text-decoration-color: rgba(216, 255, 98, 0.35);
+  text-underline-offset: 0.25rem;
+}
+
+.footer-link-group a:hover {
+  color: var(--lime);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  justify-content: space-between;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.25rem;
+}
+
+.footer-bottom p {
   font-size: 0.78rem;
+  margin: 0;
   white-space: nowrap;
 }
 
@@ -542,8 +595,7 @@ select {
 
 @media (max-width: 620px) {
   .site-nav,
-  .section-heading,
-  .internal-link {
+  .section-heading {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -568,7 +620,17 @@ select {
   }
 
   .site-footer {
-    align-items: start;
+    padding-bottom: 2rem;
+  }
+
+  .footer-top,
+  .footer-links {
     grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 }

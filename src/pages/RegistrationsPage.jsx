@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const headers = {
@@ -50,18 +51,30 @@ export default function RegistrationsPage() {
         </div>
       </main>
       <footer className="site-footer">
-        <div>
-          <p className="footer-brand">
-            mellemrum<span>.</span>
-          </p>
-          <p>Udvalgte kulturoplevelser i Aarhus.</p>
+        <div className="footer-top">
+          <div className="footer-intro">
+            <p className="footer-brand">
+              mellemrum<span>.</span>
+            </p>
+            <p>Udvalgte kulturoplevelser og nye perspektiver på Aarhus.</p>
+          </div>
+          <nav className="footer-links" aria-label="Footer">
+            <div className="footer-link-group">
+              <p className="footer-heading">Udforsk</p>
+              <Link to="/">Events</Link>
+              <Link to="/om">Om Mellemrum</Link>
+            </div>
+            <div className="footer-link-group">
+              <p className="footer-heading">For arrangører</p>
+              <Link to="/tilmeldinger">Se tilmeldinger</Link>
+              <a href="mailto:hej@mellemrum.dk">Kontakt os</a>
+            </div>
+          </nav>
         </div>
-        <div>
-          <p className="footer-heading">Kontakt</p>
-          <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
+        <div className="footer-bottom">
+          <p className="footer-meta">© 2025 Mellemrum</p>
           <p>Aarhus, Danmark</p>
         </div>
-        <p className="footer-meta">© 2025 Mellemrum</p>
       </footer>
     </>
   );
