@@ -292,6 +292,12 @@ select {
   padding: 5rem 8vw;
 }
 
+.about-header {
+  background:
+    linear-gradient(90deg, rgba(12, 42, 34, 0.9) 0%, rgba(12, 42, 34, 0.58) 58%, rgba(12, 42, 34, 0.2) 100%),
+    url("https://images.unsplash.com/photo-1553376482-e96b68bd1e11?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.1.0") center / cover;
+}
+
 .page-header h1 {
   font-size: clamp(3rem, 6vw, 6rem);
 }
@@ -471,6 +477,51 @@ select {
   text-decoration: none;
 }
 
+.site-footer {
+  align-items: end;
+  background: #102f28;
+  color: rgba(255, 255, 255, 0.72);
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 2fr 1fr auto;
+  padding: clamp(3rem, 6vw, 5rem) 5vw;
+}
+
+.site-footer p {
+  margin: 0.35rem 0;
+}
+
+.footer-brand {
+  color: white;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 850;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.footer-brand span {
+  color: var(--lime);
+}
+
+.footer-heading {
+  color: var(--lime);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-footer a {
+  color: white;
+  display: inline-block;
+  margin: 0.45rem 0;
+}
+
+.footer-meta {
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
   .event-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -511,5 +562,10 @@ select {
 
   .registration-labels {
     display: none;
+  }
+
+  .site-footer {
+    align-items: start;
+    grid-template-columns: 1fr;
   }
 }

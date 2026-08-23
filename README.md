@@ -27,13 +27,13 @@ Appen starter normalt på `http://localhost:5173`.
 4. Tilføj projektets URL og publishable key:
 
 ```bash
-VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_URL=https://your-project.supabase.co/rest/v1
 VITE_SUPABASE_APIKEY=your-supabase-publishable-api-key
 ```
 
 5. Genstart udviklingsserveren.
 
-Hvis Supabase endnu ikke er konfigureret, viser appen midlertidige eksempeldata. Tilmeldingsformularen logger foreløbig de indtastede værdier i konsollen og gemmer ikke en tilmelding.
+Appen forventer, at events og eksisterende tilmeldinger findes i Supabase. Tilmeldingsformularen logger foreløbig de indtastede værdier i konsollen og gemmer ikke en tilmelding.
 
 ## Ruter
 

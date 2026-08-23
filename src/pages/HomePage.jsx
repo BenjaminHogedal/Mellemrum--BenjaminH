@@ -1,41 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { sampleEvents } from "../data/sampleData";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const headers = {
   apikey: import.meta.env.VITE_SUPABASE_APIKEY,
-  "Content-Type": "application/json",
+  "Content-Type": "application/json"
 };
 
-function filterEvents(events, search, category) {
-  return events.filter((event) => {
-    const matchesSearch = `${event.title} ${event.summary} ${event.venue_name}`
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    const matchesCategory = category === "Alle" || event.category === category;
-    return matchesSearch && matchesCategory;
-  });
-}
-
 export default function HomePage() {
-  const [events, setEvents] = useState(sampleEvents);
-  const [filteredEvents, setFilteredEvents] = useState(sampleEvents);
+  const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Alle");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getEvents() {
-      if (!SUPABASE_URL || SUPABASE_URL.includes("your-project")) {
-        setLoading(false);
-        return;
-      }
-
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/events?select=*&order=date.asc`, { headers });
+      const response = await fetch(`${SUPABASE_URL}/events?order=date.asc`, { headers });
       const data = await response.json();
       setEvents(data);
-      setFilteredEvents(data);
       setLoading(false);
     }
 
@@ -44,15 +26,13 @@ export default function HomePage() {
 
   const categories = ["Alle", ...new Set(events.map((event) => event.category))];
 
-  function handleSearch(value) {
-    setSearch(value);
-    setFilteredEvents(filterEvents(events, value, category));
-  }
+  const filteredEvents = events.filter((event) => {
+    const searchText = `${event.title} ${event.summary} ${event.venueName}`.toLowerCase();
+    const matchesSearch = searchText.includes(search.toLowerCase());
+    const matchesCategory = category === "Alle" || event.category === category;
 
-  function handleCategory(value) {
-    setCategory(value);
-    setFilteredEvents(filterEvents(events, search, value));
-  }
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <>
@@ -82,13 +62,13 @@ export default function HomePage() {
             <input
               type="search"
               value={search}
-              onChange={(event) => handleSearch(event.target.value)}
+              onChange={(event) => setSearch(event.target.value)}
               placeholder="Søg efter titel eller sted"
             />
           </label>
           <label>
             Kategori
-            <select value={category} onChange={(event) => handleCategory(event.target.value)}>
+            <select value={category} onChange={(event) => setCategory(event.target.value)}>
               {categories.map((item) => (
                 <option key={item}>{item}</option>
               ))}
@@ -110,7 +90,7 @@ export default function HomePage() {
                   <p>{event.summary}</p>
                   <div className="event-meta">
                     <span>{date.toLocaleDateString("da-DK", { day: "numeric", month: "short" })}</span>
-                    <span>{event.venue_name}</span>
+                    <span>{event.venueName}</span>
                   </div>
                   <Link className="card-link" to={`/events/${event.id}`}>
                     Læs mere
@@ -126,6 +106,20 @@ export default function HomePage() {
           <Link to="/tilmeldinger">Se tilmeldinger</Link>
         </aside>
       </main>
+      <footer className="site-footer">
+        <div>
+          <p className="footer-brand">
+            mellemrum<span>.</span>
+          </p>
+          <p>Udvalgte kulturoplevelser i Aarhus.</p>
+        </div>
+        <div>
+          <p className="footer-heading">Kontakt</p>
+          <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
+          <p>Aarhus, Danmark</p>
+        </div>
+        <p className="footer-meta">© 2026 Mellemrum</p>
+      </footer>
     </>
   );
 }

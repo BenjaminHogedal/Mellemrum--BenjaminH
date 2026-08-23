@@ -112,7 +112,7 @@ const imageUrl = `${import.meta.env.BASE_URL}logo.webp`;
 | Kolonne      | Type        | Note                         |
 | ------------ | ----------- | ---------------------------- |
 | `id`         | int8/bigint | Kan laves automatisk         |
-| `created_at` | timestamptz | Kan laves automatisk         |
+| `createdAt`  | timestamptz | Kan laves automatisk         |
 | `caption`    | text        | Skal udfyldes for hver post  |
 | `image`      | text        | Skal udfyldes med en fuld URL |
 
@@ -132,7 +132,7 @@ const imageUrl = `${import.meta.env.BASE_URL}logo.webp`;
 `.env.example` skal vise strukturen med eksempelværdier:
 
 ```bash
-VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1/posts
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1
 VITE_SUPABASE_APIKEY=sb_publishable_your_key_here
 ```
 

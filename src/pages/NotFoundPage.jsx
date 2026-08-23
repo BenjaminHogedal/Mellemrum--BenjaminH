@@ -12,6 +12,20 @@ export default function NotFoundPage() {
           Gå til forsiden
         </Link>
       </main>
+      <footer className="site-footer">
+        <div>
+          <p className="footer-brand">
+            mellemrum<span>.</span>
+          </p>
+          <p>Udvalgte kulturoplevelser i Aarhus.</p>
+        </div>
+        <div>
+          <p className="footer-heading">Kontakt</p>
+          <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
+          <p>Aarhus, Danmark</p>
+        </div>
+        <p className="footer-meta">© 2026 Mellemrum</p>
+      </footer>
     </>
   );
 }

@@ -9,7 +9,7 @@ Projektet bruger almindelig `fetch` i `src/pages/PostsPage.jsx`.
 For at `/posts` virker, skal fire ting være på plads:
 
 1. Supabase har en tabel, der hedder `posts`.
-2. Tabellen har kolonnerne `id`, `created_at`, `caption` og `image`.
+2. Tabellen har kolonnerne `id`, `createdAt`, `caption` og `image`.
 3. Tabellen må læses offentligt via Supabase policies.
 4. Projektet har Supabase URL og publishable key i `.env`.
 
@@ -22,7 +22,7 @@ Hvis tabellen allerede findes, så åbn `posts` og tjek, at kolonnerne passer:
 | Kolonne      | Type        | Bruges til                       |
 | ------------ | ----------- | -------------------------------- |
 | `id`         | int8/bigint | Unikt id til React `key`         |
-| `created_at` | timestamptz | Tidspunkt for posten             |
+| `createdAt`  | timestamptz | Tidspunkt for posten             |
 | `caption`    | text        | Teksten der vises under billedet |
 | `image`      | text        | URL til billedet                 |
 
@@ -32,7 +32,7 @@ Hvis tabellen ikke findes:
 2. Kald tabellen `posts`.
 3. Opret kolonnerne fra tabellen ovenfor.
 
-Det vigtigste er kolonnenavnene. React-koden forventer præcis `id`, `created_at`, `caption` og `image`.
+Det vigtigste er kolonnenavnene. React-koden forventer præcis `id`, `createdAt`, `caption` og `image`.
 
 ## 2. Indsæt et par test-data
 
@@ -79,11 +79,11 @@ Test gerne `/posts` før I ændrer policies. Hvis siden viser posts, er læseadg
 Find disse to værdier i Supabase:
 
 ```bash
-VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1/posts
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1
 VITE_SUPABASE_APIKEY=sb_publishable_your_key_here
 ```
 
-`VITE_SUPABASE_URL` er URL'en til `posts` tabellen. Den skal ende på `/rest/v1/posts`.
+`VITE_SUPABASE_URL` er base-URL'en til Supabase REST API. Den skal ende på `/rest/v1`.
 
 `VITE_SUPABASE_APIKEY` er projektets publishable key.
 
@@ -113,7 +113,7 @@ Kommandoen betyder: kopiér `.env.example` og lav en ny fil, der hedder `.env`. 
 Udfyld `.env`:
 
 ```bash
-VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1/posts
+VITE_SUPABASE_URL=https://your-project-ref.supabase.co/rest/v1
 VITE_SUPABASE_APIKEY=sb_publishable_your_key_here
 ```
 

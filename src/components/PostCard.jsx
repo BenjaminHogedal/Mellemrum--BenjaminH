@@ -1,5 +1,5 @@
 export default function PostCard({ post }) {
-  const formattedDate = new Date(post.created_at).toLocaleString("da-DK", {
+  const formattedDate = new Date(post.createdAt).toLocaleString("da-DK", {
     dateStyle: "long",
     timeStyle: "short"
   });
@@ -8,7 +8,7 @@ export default function PostCard({ post }) {
     <article className="post-card">
       <img className="post-image" src={post.image} alt="" />
       <div className="post-card-content">
-        <time className="post-time" dateTime={post.created_at}>
+        <time className="post-time" dateTime={post.createdAt}>
           {formattedDate}
         </time>
         <h2>{post.caption}</h2>

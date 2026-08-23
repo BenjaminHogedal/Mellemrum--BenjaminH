@@ -12,7 +12,7 @@ export default function PostsPage() {
 
   useEffect(() => {
     async function getPosts() {
-      const response = await fetch(URL, { headers });
+      const response = await fetch(`${URL}/posts`, { headers });
       const data = await response.json();
       setPosts(data);
     }
