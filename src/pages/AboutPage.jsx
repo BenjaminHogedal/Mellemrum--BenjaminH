@@ -28,7 +28,7 @@ export default function AboutPage() {
           <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
           <p>Aarhus, Danmark</p>
         </div>
-        <p className="footer-meta">© 2026 Mellemrum</p>
+        <p className="footer-meta">© 2024 Mellemrum</p>
       </footer>
     </>
   );

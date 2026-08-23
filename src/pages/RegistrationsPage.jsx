@@ -61,7 +61,7 @@ export default function RegistrationsPage() {
           <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
           <p>Aarhus, Danmark</p>
         </div>
-        <p className="footer-meta">© 2026 Mellemrum</p>
+        <p className="footer-meta">© 2025 Mellemrum</p>
       </footer>
     </>
   );
