@@ -48,7 +48,7 @@ SQL-filen opretter tabellerne `events` og `registrations` og indsætter de start
 
 ![Events i Supabase Table Editor](docs/images/setup/table-events.webp)
 
-Du kan også åbne **Database → Schema Visualizer**. Her skal du kunne se tabellerne `events` og `registrations`. De har endnu ingen relation til hinanden; det er en del af udgangspunktet for casen.
+Du kan også åbne **Database → Schema Visualizer**. Her skal du kunne se tabellerne `events` og `registrations`. De har endnu ingen relation til hinanden; det er en del af udgangspunktet for casen. Bemærk også, at flere events bruger samme venue, men gemmer venueoplysningerne direkte på hvert event.
 
 ![Events og registrations i Supabase Schema Visualizer](docs/images/setup/schema-visualiser.webp)
 
