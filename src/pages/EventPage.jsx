@@ -29,28 +29,7 @@ export default function EventPage() {
   }
 
   if (!event) {
-    return (
-      <>
-        <main className="narrow-page">
-          <h1>Eventet blev ikke fundet</h1>
-          <Link to="/">Tilbage til events</Link>
-        </main>
-        <footer className="site-footer">
-          <div>
-            <p className="footer-brand">
-              mellemrum<span>.</span>
-            </p>
-            <p>Udvalgte kulturoplevelser i Aarhus.</p>
-          </div>
-          <div>
-            <p className="footer-heading">Kontakt</p>
-            <a href="mailto:hej@mellemrum.dk">hej@mellemrum.dk</a>
-            <p>Aarhus, Danmark</p>
-          </div>
-          <p className="footer-meta">© 2026 Mellemrum</p>
-        </footer>
-      </>
-    );
+    return null;
   }
 
   const date = new Date(event.date);

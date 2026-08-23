@@ -76,8 +76,6 @@ export default function HomePage() {
           </label>
         </section>
 
-        {loading && <p className="message">Henter events...</p>}
-
         <section className="event-grid">
           {filteredEvents.map((event) => {
             const date = new Date(event.date);
