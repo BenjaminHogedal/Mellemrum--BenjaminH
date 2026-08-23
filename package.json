@@ -1,6 +1,6 @@
 {
-  "name": "react-router-supabase",
-  "base": "/react-router-supabase/",
+  "name": "mellemrum",
+  "base": "/mellemrum/",
   "private": true,
   "version": "1.0.0",
   "type": "module",

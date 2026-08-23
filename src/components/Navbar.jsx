@@ -2,11 +2,14 @@ import { NavLink } from "react-router";
 
 export default function Navbar() {
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/posts">Posts</NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/contact">Contact</NavLink>
+    <nav className="site-nav">
+      <NavLink className="brand" to="/">
+        mellemrum<span>.</span>
+      </NavLink>
+      <div className="nav-links">
+        <NavLink to="/">Events</NavLink>
+        <NavLink to="/om">Om Mellemrum</NavLink>
+      </div>
     </nav>
   );
 }

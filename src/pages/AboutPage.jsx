@@ -1,11 +1,20 @@
 export default function AboutPage() {
   return (
     <>
-      <header>
-        <h1>About</h1>
+      <header className="page-header">
+        <p className="eyebrow">Om platformen</p>
+        <h1>Vi skaber mellemrum i kalenderen.</h1>
       </header>
-      <main>
-        <p>This is the about page.</p>
+      <main className="narrow-page">
+        <p className="lead">
+          Mellemrum samler udvalgte kulturoplevelser i Aarhus og gør det lettere at opdage noget, du ikke allerede
+          kendte.
+        </p>
+        <h2>En enkel vej til lokale oplevelser</h2>
+        <p>
+          Platformen er udviklet som en første prototype for et lille kulturteam. Målet er at skabe et overskueligt
+          sted, hvor arrangører kan dele events, og hvor brugere hurtigt kan finde og tilmelde sig en oplevelse.
+        </p>
       </main>
     </>
   );

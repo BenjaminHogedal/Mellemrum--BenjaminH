@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import PostsPage from "./pages/PostsPage";
+import EventPage from "./pages/EventPage";
+import RegistrationsPage from "./pages/RegistrationsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
@@ -12,9 +12,9 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/posts" element={<PostsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/events/:eventId" element={<EventPage />} />
+        <Route path="/om" element={<AboutPage />} />
+        <Route path="/tilmeldinger" element={<RegistrationsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
