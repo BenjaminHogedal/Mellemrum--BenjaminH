@@ -74,6 +74,9 @@ export default function HomePage() {
           </label>
         </section>
 
+        {filteredEvents.length === 0 && (
+          <p className="no-results">Ingen events fundet. Prøv at ændre søgningen eller kategorien.</p>
+        )}
         <section className="event-grid">
           {filteredEvents.map((event) => {
             const date = new Date(event.date);
