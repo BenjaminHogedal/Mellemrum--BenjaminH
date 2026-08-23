@@ -4,6 +4,8 @@ Mellemrum er en React-prototype for en lokal kultur- og eventplatform. Projektet
 
 Guiden hjælper dig med at få React-projektet til at køre lokalt og forbinde det til dit eget Supabase-projekt. Du behøver ikke kunne skrive SQL for at følge opsætningen.
 
+[Se den udleverede løsning online](https://cederdorff.com/mellemrum/), hvis du vil udforske prototypen, før du sætter projektet op lokalt.
+
 ## Det skal du bruge
 
 - Node.js installeret på din computer
