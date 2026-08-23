@@ -15,6 +15,7 @@ export default function HomePage() {
 
   useEffect(() => {
     async function getEvents() {
+      console.log("Loading:", loading);
       const response = await fetch(`${SUPABASE_URL}/events?order=date.asc`, { headers });
       const data = await response.json();
       setEvents(data);
