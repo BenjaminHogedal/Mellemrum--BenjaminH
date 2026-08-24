@@ -84,9 +84,7 @@ export default function AboutPage() {
           <div>
             <p className="eyebrow dark">Aarhus tæt på</p>
             <h2 id="about-city-title">Find plads til noget nyt.</h2>
-            <p>
-              Mellemrum peger på steder, idéer og fællesskaber på tværs af byen — fra små scener til store tanker.
-            </p>
+            <p>Mellemrum peger på steder, idéer og fællesskaber på tværs af byen — fra små scener til store tanker.</p>
             <Link className="about-cta" to="/">
               Se kommende events →
             </Link>
