@@ -40,6 +40,8 @@ Hvis Supabase viser advarslen på billedet nedenfor, skal du vælge **Run withou
 
 ![Supabase-advarsel med knappen Run without RLS](docs/images/setup/run-without-rls.webp)
 
+Det er et bevidst scopevalg i Case 1: Authentication og authorization indgår ikke, og den interne side skal derfor ikke adgangsbeskyttes. Brug kun de udleverede eller andre fiktive testdata – aldrig rigtige personoplysninger.
+
 SQL-filen opretter tabellerne `events` og `registrations` og indsætter de startdata, som appen forventer. Vent, til Supabase viser, at din query er gennemført.
 
 ### Kontrollér resultatet
