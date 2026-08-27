@@ -11,6 +11,7 @@ const headers = {
 export default function RegistrationsPage() {
   const [registrations, setRegistrations] = useState([]);
   const [registrationCount, setRegistrationCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getRegistrations() {
@@ -23,6 +24,7 @@ export default function RegistrationsPage() {
 
       setRegistrations(data);
       setRegistrationCount(data.length);
+      setLoading(false);
     }
 
     getRegistrations();
@@ -33,39 +35,47 @@ export default function RegistrationsPage() {
       <header className="admin-header">
         <p className="eyebrow">Internt overblik</p>
         <h1>Tilmeldinger</h1>
-        <p>{registrationCount} tilmeldinger i alt</p>
+        <p>
+          {loading
+            ? "Indlæser tilmeldinger..."
+            : `${registrationCount} tilmeldinger i alt`}
+        </p>
       </header>
 
       <main>
-        <div className="registration-list">
-          <div className="registration-row registration-labels">
-            <span>Navn</span>
-            <span>Event</span>
-            <span>Dato</span>
-            <span>Status</span>
-          </div>
-
-          {registrations.map((registration) => (
-            <div className="registration-row" key={registration.id}>
-              <div>
-                <strong>{registration.name}</strong>
-                <small>{registration.email}</small>
-              </div>
-
-              <span>{registration.events?.title}</span>
-
-              <span>
-                {registration.events?.date
-                  ? new Date(registration.events.date).toLocaleDateString(
-                      "da-DK",
-                    )
-                  : ""}
-              </span>
-
-              <span className="status">{registration.status}</span>
+        {loading ? (
+          <p>Indlæser tilmeldinger...</p>
+        ) : (
+          <div className="registration-list">
+            <div className="registration-row registration-labels">
+              <span>Navn</span>
+              <span>Event</span>
+              <span>Dato</span>
+              <span>Status</span>
             </div>
-          ))}
-        </div>
+
+            {registrations.map((registration) => (
+              <div className="registration-row" key={registration.id}>
+                <div>
+                  <strong>{registration.name}</strong>
+                  <small>{registration.email}</small>
+                </div>
+
+                <span>{registration.events?.title}</span>
+
+                <span>
+                  {registration.events?.date
+                    ? new Date(registration.events.date).toLocaleDateString(
+                        "da-DK",
+                      )
+                    : ""}
+                </span>
+
+                <span className="status">{registration.status}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
 
       <footer className="site-footer">
