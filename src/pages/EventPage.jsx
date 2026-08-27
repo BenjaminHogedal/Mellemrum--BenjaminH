@@ -14,6 +14,7 @@ export default function EventPage() {
   const [event, setEvent] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [submitStatus, setSubmitStatus] = useState("idle");
 
   useEffect(() => {
     async function getEvent() {
@@ -31,22 +32,29 @@ export default function EventPage() {
   async function handleSubmit(submitEvent) {
     submitEvent.preventDefault();
 
-    const response = await fetch(`${SUPABASE_URL}/registrations`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        name,
-        email,
-        eventId: event.id,
-      }),
-    });
+    setSubmitStatus("loading");
 
-    if (response.ok) {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/registrations`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          name,
+          email,
+          eventId: event.id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Tilmeldingen kunne ikke gemmes");
+      }
+
       setName("");
       setEmail("");
-      console.log("Tilmelding gemt");
-    } else {
-      console.log("Tilmelding kunne ikke gemmes");
+      setSubmitStatus("success");
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
     }
   }
 
@@ -143,7 +151,19 @@ export default function EventPage() {
               placeholder="dig@example.com"
             />
 
-            <button type="submit">Tilmeld mig</button>
+            <button type="submit" disabled={submitStatus === "loading"}>
+              {submitStatus === "loading" ? "Sender..." : "Tilmeld mig"}
+            </button>
+
+            {submitStatus === "success" && (
+              <p role="status">Din tilmelding er sendt.</p>
+            )}
+
+            {submitStatus === "error" && (
+              <p role="alert">
+                Tilmeldingen kunne ikke gennemføres. Prøv igen.
+              </p>
+            )}
           </form>
         </section>
       </main>
