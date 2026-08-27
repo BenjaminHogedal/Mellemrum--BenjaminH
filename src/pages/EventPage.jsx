@@ -58,9 +58,9 @@ export default function EventPage() {
     }
   }
 
-  if (!event) {
-    return null;
-  }
+ if (!event) {
+   return <p>Indlæser event...</p>;
+ }
 
   const date = new Date(event.date);
 
