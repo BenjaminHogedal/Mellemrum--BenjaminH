@@ -61,7 +61,7 @@ values
     'Aarhus C',
     'https://godsbanen.dk/',
     'Koncert',
-    'https://images.unsplash.com/photo-1562423426-934230877f7a?q=80&w=2525&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1562423426-934230877f7a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     120
   ),
   (
@@ -76,7 +76,7 @@ values
     'Aarhus C',
     'https://dokk1.dk/',
     'Talk',
-    'https://images.unsplash.com/photo-1562535375-d6ce64f58475?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.1.0',
+    'https://images.unsplash.com/photo-1562535375-d6ce64f58475?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0',
     0
   ),
   (
@@ -91,7 +91,7 @@ values
     'Aarhus C',
     'https://institutforx.dk/',
     'Workshop',
-    'https://images.unsplash.com/photo-1777751006387-558bdf78a02e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1777751006387-558bdf78a02e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     175
   ),
   (
@@ -106,7 +106,7 @@ values
     'Aarhus C',
     'https://aarhus.dk/folkestedet/om-folkestedet',
     'Fællesskab',
-    'https://plus.unsplash.com/premium_photo-1692200697697-52442fa20580?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://plus.unsplash.com/premium_photo-1692200697697-52442fa20580?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     95
   ),
   (
@@ -121,7 +121,7 @@ values
     'Aarhus C',
     null,
     'Scene',
-    'https://images.unsplash.com/photo-1561981898-9c83401e4cfd?q=80&w=3080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1561981898-9c83401e4cfd?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     60
   ),
   (
@@ -136,7 +136,7 @@ values
     'Aarhus C',
     'https://dokk1.dk/',
     'Workshop',
-    'https://images.unsplash.com/photo-1559070169-a3077159ee16?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1559070169-a3077159ee16?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     40
   ),
   (
@@ -151,7 +151,7 @@ values
     'Aarhus C',
     null,
     'Byvandring',
-    'https://images.unsplash.com/photo-1532370778713-1400f3d62094?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.1.0',
+    'https://images.unsplash.com/photo-1532370778713-1400f3d62094?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0',
     75
   ),
   (
@@ -166,7 +166,7 @@ values
     'Aarhus C',
     'https://godsbanen.dk/',
     'Workshop',
-    'https://images.unsplash.com/photo-1781389005078-d9e413d89c94?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.1.0',
+    'https://images.unsplash.com/photo-1781389005078-d9e413d89c94?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0',
     220
   ),
   (
@@ -181,7 +181,7 @@ values
     'Aarhus C',
     null,
     'Koncert',
-    'https://images.unsplash.com/photo-1569660437240-b27b957bf210?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1569660437240-b27b957bf210?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     85
   )
 on conflict (id) do update set
