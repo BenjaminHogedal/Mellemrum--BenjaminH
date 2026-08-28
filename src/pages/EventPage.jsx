@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-
-const headers = {
-  apikey: import.meta.env.VITE_SUPABASE_APIKEY,
-  "Content-Type": "application/json",
-};
+import { getEventById, createRegistration } from "../services/supabaseService";
 
 export default function EventPage() {
   const { eventId } = useParams();
@@ -17,16 +11,12 @@ export default function EventPage() {
   const [submitStatus, setSubmitStatus] = useState("idle");
 
   useEffect(() => {
-    async function getEvent() {
-      const response = await fetch(`${SUPABASE_URL}/events?id=eq.${eventId}`, {
-        headers,
-      });
+  async function loadEvent() {
+    const data = await getEventById(eventId);
+    setEvent(data);
+  }
 
-      const data = await response.json();
-      setEvent(data[0]);
-    }
-
-    getEvent();
+    loadEvent();
   }, [eventId]);
 
   async function handleSubmit(submitEvent) {
@@ -34,28 +24,22 @@ export default function EventPage() {
 
     setSubmitStatus("loading");
 
-    try {
-      const response = await fetch(`${SUPABASE_URL}/registrations`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          name,
-          email,
-          eventId: event.id,
-        }),
-      });
+ try {
+   await createRegistration({
+     name,
+     email,
+     eventId: event.id,
+   });
 
-      if (!response.ok) {
-        throw new Error("Tilmeldingen kunne ikke gemmes");
-      }
-
-      setName("");
-      setEmail("");
-      setSubmitStatus("success");
-    } catch (error) {
-      console.error(error);
-      setSubmitStatus("error");
-    }
+   setName("");
+   setEmail("");
+   setSubmitStatus("success");
+ } 
+ 
+ catch (error) {
+   console.error(error);
+   setSubmitStatus("error");
+ }
   }
 
  if (!event) {
