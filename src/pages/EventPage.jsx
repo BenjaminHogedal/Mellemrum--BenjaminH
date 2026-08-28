@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { getEventById, createRegistration } from "../services/supabaseService";
 import Footer from "../components/Footer";
+import { formatEventDate, formatEventTime } from "../utils/dateUtils";
 
 export default function EventPage() {
   const { eventId } = useParams();
@@ -47,8 +48,6 @@ export default function EventPage() {
    return <p>Indlæser event...</p>;
  }
 
-  const date = new Date(event.date);
-
   return (
     <>
       <main className="event-page">
@@ -69,16 +68,7 @@ export default function EventPage() {
             <div className="detail-list">
               <p>
                 <strong>Dato</strong>
-                {date.toLocaleDateString("da-DK", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "long",
-                })}{" "}
-                kl.{" "}
-                {date.toLocaleTimeString("da-DK", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {formatEventDate(event.date)} kl. {formatEventTime(event.date)}
               </p>
 
               <p>

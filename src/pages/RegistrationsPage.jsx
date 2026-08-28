@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import { getRegistrations } from "../services/supabaseService";
 import Footer from "../components/Footer";
+import { formatShortDate } from "../utils/dateUtils";
 
 export default function RegistrationsPage() {
   const [registrations, setRegistrations] = useState([]);
@@ -52,9 +52,7 @@ export default function RegistrationsPage() {
 
                 <span>
                   {registration.events?.date
-                    ? new Date(registration.events.date).toLocaleDateString(
-                        "da-DK",
-                      )
+                    ? formatShortDate(registration.events.date)
                     : ""}
                 </span>
 
