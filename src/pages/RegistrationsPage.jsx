@@ -10,7 +10,6 @@ const headers = {
 
 export default function RegistrationsPage() {
   const [registrations, setRegistrations] = useState([]);
-  const [registrationCount, setRegistrationCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +22,6 @@ export default function RegistrationsPage() {
       const data = await response.json();
 
       setRegistrations(data);
-      setRegistrationCount(data.length);
       setLoading(false);
     }
 
@@ -38,7 +36,7 @@ export default function RegistrationsPage() {
         <p>
           {loading
             ? "Indlæser tilmeldinger..."
-            : `${registrationCount} tilmeldinger i alt`}
+            : `${registrations.length} tilmeldinger i alt`}
         </p>
       </header>
 
