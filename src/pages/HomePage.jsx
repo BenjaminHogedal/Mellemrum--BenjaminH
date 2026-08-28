@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getEvents } from "../services/supabaseService";
 import Footer from "../components/Footer";
+import { formatEventDate } from "../utils/dateUtils";
 
 export default function HomePage() {
   const [events, setEvents] = useState([]);
@@ -32,17 +33,6 @@ export default function HomePage() {
 
     return matchesSearch && matchesCategory;
   });
-
-  function formatEventDate(eventDate) {
-    const date = new Date(eventDate);
-    const formattedDate = date.toLocaleDateString("da-DK", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-    });
-
-    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-  }
 
   return (
     <>
