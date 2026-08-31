@@ -37,7 +37,8 @@ export default function RegistrationsPage() {
             <div className="registration-row registration-labels">
               <span>Navn</span>
               <span>Event</span>
-              <span>Dato</span>
+              <span>Eventdato</span>
+              <span>Tilmeldt</span>
               <span>Status</span>
             </div>
 
@@ -53,6 +54,12 @@ export default function RegistrationsPage() {
                 <span>
                   {registration.events?.date
                     ? formatShortDate(registration.events.date)
+                    : ""}
+                </span>
+                
+                <span>
+                  {registration.createdAt
+                    ? formatShortDate(registration.createdAt)
                     : ""}
                 </span>
 
