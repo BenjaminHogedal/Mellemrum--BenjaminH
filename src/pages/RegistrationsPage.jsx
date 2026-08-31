@@ -6,6 +6,9 @@ import { formatShortDate } from "../utils/dateUtils";
 export default function RegistrationsPage() {
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortDirection, setSortDirection] = useState("desc");
+
 
   useEffect(() => {
   async function loadRegistrations() {
@@ -16,6 +19,50 @@ export default function RegistrationsPage() {
 
   loadRegistrations();
   }, []);
+
+  function handleSort(column) {
+    if (sortBy === column) {
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortDirection("asc");
+    }
+  }
+
+  const sortedRegistrations = [...registrations].sort((a, b) => {
+    let aValue;
+    let bValue;
+
+    if (sortBy === "name") {
+      aValue = a.name.toLowerCase();
+      bValue = b.name.toLowerCase();
+    }
+
+    if (sortBy === "event") {
+      aValue = a.events?.title.toLowerCase() || "";
+      bValue = b.events?.title.toLowerCase() || "";
+    }
+
+    if (sortBy === "eventDate") {
+      aValue = new Date(a.events?.date);
+      bValue = new Date(b.events?.date);
+    }
+
+    if (sortBy === "createdAt") {
+      aValue = new Date(a.createdAt);
+      bValue = new Date(b.createdAt);
+    }
+
+    if (aValue < bValue) {
+      return sortDirection === "asc" ? -1 : 1;
+    }
+
+    if (aValue > bValue) {
+      return sortDirection === "asc" ? 1 : -1;
+    }
+
+    return 0;
+  });
 
   return (
     <>
@@ -35,14 +82,31 @@ export default function RegistrationsPage() {
         ) : (
           <div className="registration-list">
             <div className="registration-row registration-labels">
-              <span>Navn</span>
-              <span>Event</span>
-              <span>Eventdato</span>
-              <span>Tilmeldt</span>
+              <button onClick={() => handleSort("name")}>
+                Navn{" "}
+                {sortBy === "name" && (sortDirection === "asc" ? "↑" : "↓")}
+              </button>
+
+              <button onClick={() => handleSort("event")}>
+                Event{" "}
+                {sortBy === "event" && (sortDirection === "asc" ? "↑" : "↓")}
+              </button>
+
+              <button onClick={() => handleSort("eventDate")}>
+                Eventdato{" "}
+                {sortBy === "eventDate" &&
+                  (sortDirection === "asc" ? "↑" : "↓")}
+              </button>
+
+              <button onClick={() => handleSort("createdAt")}>
+                Tilmeldt{" "}
+                {sortBy === "createdAt" &&
+                  (sortDirection === "asc" ? "↑" : "↓")}
+              </button>
               <span>Status</span>
             </div>
 
-            {registrations.map((registration) => (
+            {sortedRegistrations.map((registration) => (
               <div className="registration-row" key={registration.id}>
                 <div>
                   <strong>{registration.name}</strong>
@@ -56,7 +120,7 @@ export default function RegistrationsPage() {
                     ? formatShortDate(registration.events.date)
                     : ""}
                 </span>
-                
+
                 <span>
                   {registration.createdAt
                     ? formatShortDate(registration.createdAt)
