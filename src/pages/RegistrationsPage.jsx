@@ -8,7 +8,7 @@ export default function RegistrationsPage() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("createdAt");
   const [sortDirection, setSortDirection] = useState("desc");
-
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
   async function loadRegistrations() {
@@ -29,7 +29,16 @@ export default function RegistrationsPage() {
     }
   }
 
-  const sortedRegistrations = [...registrations].sort((a, b) => {
+const filteredRegistrations = registrations.filter((registration) => {
+  const searchText = search.toLowerCase();
+
+  const name = registration.name.toLowerCase();
+  const event = registration.events?.title.toLowerCase() || "";
+
+  return name.startsWith(searchText) || event.startsWith(searchText);
+});
+
+  const sortedRegistrations = [...filteredRegistrations].sort((a, b) => {
     let aValue;
     let bValue;
 
@@ -80,57 +89,71 @@ export default function RegistrationsPage() {
         {loading ? (
           <p>Indlæser tilmeldinger...</p>
         ) : (
-          <div className="registration-list">
-            <div className="registration-row registration-labels">
-              <button onClick={() => handleSort("name")}>
-                Navn{" "}
-                {sortBy === "name" && (sortDirection === "asc" ? "↑" : "↓")}
-              </button>
-
-              <button onClick={() => handleSort("event")}>
-                Event{" "}
-                {sortBy === "event" && (sortDirection === "asc" ? "↑" : "↓")}
-              </button>
-
-              <button onClick={() => handleSort("eventDate")}>
-                Eventdato{" "}
-                {sortBy === "eventDate" &&
-                  (sortDirection === "asc" ? "↑" : "↓")}
-              </button>
-
-              <button onClick={() => handleSort("createdAt")}>
-                Tilmeldt{" "}
-                {sortBy === "createdAt" &&
-                  (sortDirection === "asc" ? "↑" : "↓")}
-              </button>
-              <span>Status</span>
+          <>
+            <div className="registration-search">
+              <label>
+                Søg
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder="Søg efter navn eller event"
+                />
+              </label>
             </div>
 
-            {sortedRegistrations.map((registration) => (
-              <div className="registration-row" key={registration.id}>
-                <div>
-                  <strong>{registration.name}</strong>
-                  <small>{registration.email}</small>
-                </div>
+            <div className="registration-list">
+              <div className="registration-row registration-labels">
+                <button onClick={() => handleSort("name")}>
+                  Navn{" "}
+                  {sortBy === "name" && (sortDirection === "asc" ? "↑" : "↓")}
+                </button>
 
-                <span>{registration.events?.title}</span>
+                <button onClick={() => handleSort("event")}>
+                  Event{" "}
+                  {sortBy === "event" && (sortDirection === "asc" ? "↑" : "↓")}
+                </button>
 
-                <span>
-                  {registration.events?.date
-                    ? formatShortDate(registration.events.date)
-                    : ""}
-                </span>
+                <button onClick={() => handleSort("eventDate")}>
+                  Eventdato{" "}
+                  {sortBy === "eventDate" &&
+                    (sortDirection === "asc" ? "↑" : "↓")}
+                </button>
 
-                <span>
-                  {registration.createdAt
-                    ? formatShortDate(registration.createdAt)
-                    : ""}
-                </span>
-
-                <span className="status">{registration.status}</span>
+                <button onClick={() => handleSort("createdAt")}>
+                  Tilmeldt{" "}
+                  {sortBy === "createdAt" &&
+                    (sortDirection === "asc" ? "↑" : "↓")}
+                </button>
+                <span>Status</span>
               </div>
-            ))}
-          </div>
+
+              {sortedRegistrations.map((registration) => (
+                <div className="registration-row" key={registration.id}>
+                  <div>
+                    <strong>{registration.name}</strong>
+                    <small>{registration.email}</small>
+                  </div>
+
+                  <span>{registration.events?.title}</span>
+
+                  <span>
+                    {registration.events?.date
+                      ? formatShortDate(registration.events.date)
+                      : ""}
+                  </span>
+
+                  <span>
+                    {registration.createdAt
+                      ? formatShortDate(registration.createdAt)
+                      : ""}
+                  </span>
+
+                  <span className="status">{registration.status}</span>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </main>
 
