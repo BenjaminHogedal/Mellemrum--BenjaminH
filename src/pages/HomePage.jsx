@@ -27,7 +27,7 @@ export default function HomePage() {
 
   const filteredEvents = events.filter((event) => {
     const searchText =
-      `${event.title} ${event.summary} ${event.venueName}`.toLowerCase();
+      `${event.title} ${event.category} ${event.venueName}`.toLowerCase();
     const matchesSearch = searchText.includes(search.toLowerCase());
     const matchesCategory = category === "Alle" || event.category === category;
 
@@ -64,7 +64,7 @@ export default function HomePage() {
               type="search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="Søg efter titel eller sted"
+              placeholder="Søg efter titel, kategori eller sted"
             />
           </label>
           <label>
