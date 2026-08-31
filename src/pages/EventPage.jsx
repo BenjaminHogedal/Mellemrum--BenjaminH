@@ -21,8 +21,8 @@ export default function EventPage() {
     loadEvent();
   }, [eventId]);
 
-  async function handleSubmit(submitEvent) {
-    submitEvent.preventDefault();
+  async function handleSubmit(formEvent) {
+    formEvent.preventDefault();
 
     setSubmitStatus("loading");
 
