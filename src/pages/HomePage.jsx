@@ -30,8 +30,9 @@ export default function HomePage() {
       `${event.title} ${event.category} ${event.venueName}`.toLowerCase();
     const matchesSearch = searchText.includes(search.toLowerCase());
     const matchesCategory = category === "Alle" || event.category === category;
+     const isUpcoming = new Date(event.date) >= new Date();
 
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory && isUpcoming;
   });
 
   return (
