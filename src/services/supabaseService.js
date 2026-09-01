@@ -6,17 +6,23 @@ const headers = {
 };
 
 export async function getEvents() {
-  const response = await fetch(`${SUPABASE_URL}/events?order=date.asc`, {
-    headers,
-  });
+  const response = await fetch(
+    `${SUPABASE_URL}/events?select=*,venues(*)&order=date.asc`,
+    {
+      headers,
+    },
+  );
 
   return await response.json();
 }
 
 export async function getEventById(eventId) {
-  const response = await fetch(`${SUPABASE_URL}/events?id=eq.${eventId}`, {
-    headers,
-  });
+   const response = await fetch(
+     `${SUPABASE_URL}/events?select=*,venues(*)&id=eq.${eventId}`,
+     {
+       headers,
+     },
+   );
 
   const data = await response.json();
   return data[0];
