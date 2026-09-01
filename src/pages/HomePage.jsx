@@ -27,7 +27,7 @@ export default function HomePage() {
 
   const filteredEvents = events.filter((event) => {
     const searchText =
-      `${event.title} ${event.category} ${event.venueName}`.toLowerCase();
+      `${event.title} ${event.category} ${event.venues?.name}`.toLowerCase();
     const matchesSearch = searchText.includes(search.toLowerCase());
     const matchesCategory = category === "Alle" || event.category === category;
      const isUpcoming = new Date(event.date) >= new Date();
@@ -94,7 +94,7 @@ export default function HomePage() {
                   <p>{event.summary}</p>
                   <div className="event-meta">
                     <span>{formatEventDate(event.date)}</span>
-                    <span>{event.venueName}</span>
+                    <span>{event.venues?.name}</span>
                   </div>
                   <Link className="card-link" to={`/events/${event.id}`}>
                     Læs mere
