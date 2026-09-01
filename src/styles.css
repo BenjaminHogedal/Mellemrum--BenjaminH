@@ -927,3 +927,241 @@ select:focus {
   border-radius: 10px;
   font: inherit;
 }
+
+.admin-events-page {
+  display: grid;
+  gap: 3rem;
+}
+
+.admin-events-header {
+  max-width: 760px;
+}
+
+.admin-events-header h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.admin-events-header > p:last-child {
+  color: #59635f;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  margin: 1.25rem 0 0;
+  max-width: 38rem;
+}
+
+.admin-event-form-section,
+.admin-event-list-section {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 8px 26px rgba(23, 32, 29, 0.05);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.admin-section-heading {
+  align-items: end;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.admin-section-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin: 0;
+}
+
+.admin-event-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-field {
+  display: grid;
+  font-size: 0.78rem;
+  font-weight: 800;
+  gap: 0.45rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-field-wide,
+.admin-field-full {
+  grid-column: 1 / -1;
+}
+
+.admin-field textarea {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 150px;
+  padding: 0.85rem 0.9rem;
+  resize: vertical;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-field textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(23, 63, 53, 0.12);
+  outline: none;
+}
+
+.admin-form-actions {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
+.admin-primary-button,
+.admin-edit-button,
+.admin-delete-button,
+.admin-cancel-button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.admin-primary-button {
+  background: var(--green);
+  border-radius: 999px;
+  color: white;
+  min-height: 48px;
+  padding: 0.75rem 1.2rem;
+}
+
+.admin-primary-button:hover {
+  background: #225f50;
+}
+
+.admin-primary-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.admin-cancel-button {
+  background: transparent;
+  color: var(--green);
+  padding: 0.5rem 0;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.admin-success-message,
+.admin-error-message {
+  border-radius: 8px;
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+}
+
+.admin-success-message {
+  background: #dff3cc;
+}
+
+.admin-error-message {
+  background: #ffe0d8;
+  color: #8a321f;
+}
+
+.admin-event-count {
+  background: var(--cream);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.5rem 0.8rem;
+}
+
+.admin-event-list {
+  border-top: 1px solid var(--line);
+}
+
+.admin-event-row {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 1.35rem 0;
+}
+
+.admin-event-row:last-child {
+  border-bottom: 0;
+}
+
+.admin-event-info h3 {
+  font-size: 1.45rem;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.admin-event-info > p:last-child {
+  color: #65706c;
+  margin: 0.45rem 0 0;
+}
+
+.admin-event-actions {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.admin-edit-button,
+.admin-delete-button {
+  border-radius: 999px;
+  padding: 0.65rem 0.9rem;
+}
+
+.admin-edit-button {
+  background: var(--cream);
+  color: var(--green);
+}
+
+.admin-edit-button:hover {
+  background: var(--lime);
+}
+
+.admin-delete-button {
+  background: #ffe0d8;
+  color: #8a321f;
+}
+
+.admin-delete-button:hover {
+  background: #ffc9bc;
+}
+
+@media (max-width: 700px) {
+  .admin-section-heading,
+  .admin-event-row,
+  .admin-form-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-event-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-field-wide,
+  .admin-field-full {
+    grid-column: auto;
+  }
+
+  .admin-event-actions {
+    width: 100%;
+  }
+
+  .admin-edit-button,
+  .admin-delete-button {
+    flex: 1;
+  }
+}
