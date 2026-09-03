@@ -119,3 +119,17 @@ export async function deleteEvent(eventId) {
     throw new Error("Eventet kunne ikke slettes");
   }
 }
+
+export async function deleteRegistration(registrationId) {
+  const response = await fetch(
+    `${SUPABASE_URL}/registrations?id=eq.${registrationId}`,
+    {
+      method: "DELETE",
+      headers,
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Tilmeldingen kunne ikke slettes");
+  }
+}

@@ -1202,3 +1202,19 @@ select:focus {
 .registration-group-meta p {
   margin: 0;
 }
+
+.registration-delete-button {
+  width: fit-content;
+  padding: 8px 18px;
+  border: 1px solid #d98b82;
+  border-radius: 6px;
+  background: transparent;
+  color: #b04438;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registration-delete-button:hover {
+  background: #f8e8e5;
+}
