@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { getEventById, createRegistration } from "../services/supabaseService";
+import {getEventById,createRegistration,getUserByEmail,createUser,} from "../services/supabaseService";
 import Footer from "../components/Footer";
 import { formatEventDate, formatEventTime } from "../utils/dateUtils";
 
@@ -21,28 +21,34 @@ export default function EventPage() {
     loadEvent();
   }, [eventId]);
 
-  async function handleSubmit(formEvent) {
-    formEvent.preventDefault();
+async function handleSubmit(formEvent) {
+  formEvent.preventDefault();
 
-    setSubmitStatus("loading");
+  setSubmitStatus("loading");
 
- try {
+  try {
+    let user = await getUserByEmail(email);
+
+    if (!user) {
+      user = await createUser({
+        name,
+        email,
+      });
+    }
+
    await createRegistration({
-     name,
-     email,
+     userId: user.id,
      eventId: event.id,
    });
 
-   setName("");
-   setEmail("");
-   setSubmitStatus("success");
- } 
- 
- catch (error) {
-   console.error(error);
-   setSubmitStatus("error");
- }
+    setName("");
+    setEmail("");
+    setSubmitStatus("success");
+  } catch (error) {
+    console.error(error);
+    setSubmitStatus("error");
   }
+}
 
  if (!event) {
    return <p>Indlæser event...</p>;

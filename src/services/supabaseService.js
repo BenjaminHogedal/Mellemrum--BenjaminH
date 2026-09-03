@@ -38,7 +38,7 @@ export async function getEventById(eventId) {
 
 export async function getRegistrations() {
   const response = await fetch(
-    `${SUPABASE_URL}/registrations?select=id,createdAt,name,email,status,eventId,events(title,date)&order=createdAt.desc`,
+    `${SUPABASE_URL}/registrations?select=id,createdAt,status,eventId,userId,events(title,date),users(name,email)&order=createdAt.desc`,
     { headers },
   );
 
@@ -55,6 +55,34 @@ export async function createRegistration(registration) {
   if (!response.ok) {
     throw new Error("Tilmeldingen kunne ikke gemmes");
   }
+}
+
+export async function getUserByEmail(email) {
+  const response = await fetch(
+    `${SUPABASE_URL}/users?select=id,name,email&email=eq.${encodeURIComponent(email)}`,
+    { headers },
+  );
+
+  const data = await response.json();
+  return data[0];
+}
+
+export async function createUser(user) {
+  const response = await fetch(`${SUPABASE_URL}/users`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(user),
+  });
+
+  if (!response.ok) {
+    throw new Error("Brugeren kunne ikke oprettes");
+  }
+
+  const data = await response.json();
+  return data[0];
 }
 
 export async function createEvent(event) {
