@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { getRegistrations } from "../services/supabaseService";
+import {
+  getRegistrations,
+  deleteRegistration,
+} from "../services/supabaseService";
 import Footer from "../components/Footer";
 import { formatShortDate } from "../utils/dateUtils";
 
@@ -26,6 +29,25 @@ export default function RegistrationsPage() {
     } else {
       setSortBy(column);
       setSortDirection("asc");
+    }
+  }
+
+  async function handleDelete(registrationId) {
+    const shouldDelete = window.confirm(
+      "Er du sikker på, at du vil slette denne tilmelding?",
+    );
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    try {
+      await deleteRegistration(registrationId);
+
+      const updatedRegistrations = await getRegistrations();
+      setRegistrations(updatedRegistrations);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -156,6 +178,8 @@ export default function RegistrationsPage() {
                       </button>
 
                       <span>Status</span>
+
+                      <span>Handling</span>
                     </div>
 
                     {group.registrations.map((registration) => (
@@ -172,6 +196,14 @@ export default function RegistrationsPage() {
                         </span>
 
                         <span className="status">{registration.status}</span>
+
+                        <button
+                          className="registration-delete-button"
+                          type="button"
+                          onClick={() => handleDelete(registration.id)}
+                        >
+                          Slet
+                        </button>
                       </div>
                     ))}
                   </div>
