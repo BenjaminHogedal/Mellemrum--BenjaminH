@@ -32,7 +32,7 @@ export default function RegistrationsPage() {
 const filteredRegistrations = registrations.filter((registration) => {
   const searchText = search.toLowerCase();
 
-  const name = registration.name.toLowerCase();
+  const name = registration.users?.name.toLowerCase() || "";
   const event = registration.events?.title.toLowerCase() || "";
 
   return name.startsWith(searchText) || event.startsWith(searchText);
@@ -43,8 +43,8 @@ const filteredRegistrations = registrations.filter((registration) => {
     let bValue;
 
     if (sortBy === "name") {
-      aValue = a.name.toLowerCase();
-      bValue = b.name.toLowerCase();
+      aValue = a.users?.name.toLowerCase() || "";
+      bValue = b.users?.name.toLowerCase() || "";
     }
 
     if (sortBy === "event") {
@@ -131,8 +131,8 @@ const filteredRegistrations = registrations.filter((registration) => {
               {sortedRegistrations.map((registration) => (
                 <div className="registration-row" key={registration.id}>
                   <div>
-                    <strong>{registration.name}</strong>
-                    <small>{registration.email}</small>
+                    <strong>{registration.users?.name}</strong>
+                    <small>{registration.users?.email}</small>
                   </div>
 
                   <span>{registration.events?.title}</span>
