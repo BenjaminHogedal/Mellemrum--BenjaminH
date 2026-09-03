@@ -11,13 +11,13 @@ export default function RegistrationsPage() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-  async function loadRegistrations() {
-    const data = await getRegistrations();
-    setRegistrations(data);
-    setLoading(false);
-  }
+    async function loadRegistrations() {
+      const data = await getRegistrations();
+      setRegistrations(data);
+      setLoading(false);
+    }
 
-  loadRegistrations();
+    loadRegistrations();
   }, []);
 
   function handleSort(column) {
@@ -29,14 +29,14 @@ export default function RegistrationsPage() {
     }
   }
 
-const filteredRegistrations = registrations.filter((registration) => {
-  const searchText = search.toLowerCase();
+  const filteredRegistrations = registrations.filter((registration) => {
+    const searchText = search.toLowerCase();
 
-  const name = registration.users?.name.toLowerCase() || "";
-  const event = registration.events?.title.toLowerCase() || "";
+    const name = registration.users?.name.toLowerCase() || "";
+    const event = registration.events?.title.toLowerCase() || "";
 
-  return name.startsWith(searchText) || event.startsWith(searchText);
-});
+    return name.startsWith(searchText) || event.startsWith(searchText);
+  });
 
   const sortedRegistrations = [...filteredRegistrations].sort((a, b) => {
     let aValue;
@@ -45,16 +45,6 @@ const filteredRegistrations = registrations.filter((registration) => {
     if (sortBy === "name") {
       aValue = a.users?.name.toLowerCase() || "";
       bValue = b.users?.name.toLowerCase() || "";
-    }
-
-    if (sortBy === "event") {
-      aValue = a.events?.title.toLowerCase() || "";
-      bValue = b.events?.title.toLowerCase() || "";
-    }
-
-    if (sortBy === "eventDate") {
-      aValue = new Date(a.events?.date);
-      bValue = new Date(b.events?.date);
     }
 
     if (sortBy === "createdAt") {
@@ -73,11 +63,35 @@ const filteredRegistrations = registrations.filter((registration) => {
     return 0;
   });
 
+  const registrationsByEvent = sortedRegistrations.reduce(
+    (groups, registration) => {
+      const eventId = registration.eventId;
+
+      if (!groups[eventId]) {
+        groups[eventId] = {
+          id: eventId,
+          title: registration.events?.title || "Ukendt event",
+          date: registration.events?.date,
+          registrations: [],
+        };
+      }
+
+      groups[eventId].registrations.push(registration);
+
+      return groups;
+    },
+    {},
+  );
+
+  const eventGroups = Object.values(registrationsByEvent);
+
   return (
     <>
       <header className="admin-header">
         <p className="eyebrow">Internt overblik</p>
+
         <h1>Tilmeldinger</h1>
+
         <p>
           {loading
             ? "Indlæser tilmeldinger..."
@@ -102,55 +116,66 @@ const filteredRegistrations = registrations.filter((registration) => {
               </label>
             </div>
 
-            <div className="registration-list">
-              <div className="registration-row registration-labels">
-                <button onClick={() => handleSort("name")}>
-                  Navn{" "}
-                  {sortBy === "name" && (sortDirection === "asc" ? "↑" : "↓")}
-                </button>
+            <div className="registration-groups">
+              {eventGroups.map((group) => (
+                <section className="registration-group" key={group.id}>
+                  <div className="registration-group-header">
+                    <p className="eyebrow dark">Event</p>
 
-                <button onClick={() => handleSort("event")}>
-                  Event{" "}
-                  {sortBy === "event" && (sortDirection === "asc" ? "↑" : "↓")}
-                </button>
+                    <h2>{group.title}</h2>
 
-                <button onClick={() => handleSort("eventDate")}>
-                  Eventdato{" "}
-                  {sortBy === "eventDate" &&
-                    (sortDirection === "asc" ? "↑" : "↓")}
-                </button>
+                    <div className="registration-group-meta">
+                      <p>
+                        <strong>Eventdato:</strong>{" "}
+                        {group.date ? formatShortDate(group.date) : ""}
+                      </p>
 
-                <button onClick={() => handleSort("createdAt")}>
-                  Tilmeldt{" "}
-                  {sortBy === "createdAt" &&
-                    (sortDirection === "asc" ? "↑" : "↓")}
-                </button>
-                <span>Status</span>
-              </div>
-
-              {sortedRegistrations.map((registration) => (
-                <div className="registration-row" key={registration.id}>
-                  <div>
-                    <strong>{registration.users?.name}</strong>
-                    <small>{registration.users?.email}</small>
+                      <p>
+                        <strong>
+                          {group.registrations.length}{" "}
+                          {group.registrations.length === 1
+                            ? "tilmelding"
+                            : "tilmeldinger"}
+                        </strong>
+                      </p>
+                    </div>
                   </div>
 
-                  <span>{registration.events?.title}</span>
+                  <div className="registration-list">
+                    <div className="registration-row registration-labels">
+                      <button onClick={() => handleSort("name")}>
+                        Navn{" "}
+                        {sortBy === "name" &&
+                          (sortDirection === "asc" ? "↑" : "↓")}
+                      </button>
 
-                  <span>
-                    {registration.events?.date
-                      ? formatShortDate(registration.events.date)
-                      : ""}
-                  </span>
+                      <button onClick={() => handleSort("createdAt")}>
+                        Tilmeldingsdato{" "}
+                        {sortBy === "createdAt" &&
+                          (sortDirection === "asc" ? "↑" : "↓")}
+                      </button>
 
-                  <span>
-                    {registration.createdAt
-                      ? formatShortDate(registration.createdAt)
-                      : ""}
-                  </span>
+                      <span>Status</span>
+                    </div>
 
-                  <span className="status">{registration.status}</span>
-                </div>
+                    {group.registrations.map((registration) => (
+                      <div className="registration-row" key={registration.id}>
+                        <div>
+                          <strong>{registration.users?.name}</strong>
+                          <small>{registration.users?.email}</small>
+                        </div>
+
+                        <span>
+                          {registration.createdAt
+                            ? formatShortDate(registration.createdAt)
+                            : ""}
+                        </span>
+
+                        <span className="status">{registration.status}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
           </>
