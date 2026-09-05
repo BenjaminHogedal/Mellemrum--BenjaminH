@@ -119,17 +119,21 @@ async function handleSubmit(formEvent) {
             <label>
               Navn
               <input
+                type="text"
                 value={name}
                 onChange={(inputEvent) => setName(inputEvent.target.value)}
+                required
               />
             </label>
 
             <span>E-mail</span>
 
             <input
+              type="email"
               value={email}
               onChange={(inputEvent) => setEmail(inputEvent.target.value)}
               placeholder="dig@example.com"
+              required
             />
 
             <button type="submit" disabled={submitStatus === "loading"}>
